@@ -24,6 +24,7 @@ use Composer\Package\PackageInterface;
 use Composer\Repository\ArrayRepository;
 use Composer\Repository\InstalledFilesystemRepository;
 use Composer\Repository\PlatformRepository;
+use Composer\IO\NullIO;
 
 class Recorder
 {
@@ -178,7 +179,7 @@ class Recorder
             $request->install($package->getName());
         }
 
-        $solver = new Solver(new DefaultPolicy(), $pool, $toRepo);
+        $solver = new Solver(new DefaultPolicy(), $pool, $toRepo, new NullIO());
 
         return $solver->solve($request);
     }
